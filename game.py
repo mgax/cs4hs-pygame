@@ -1,21 +1,20 @@
-import time
 import pygame
 
-SIZE_X = 640
-SIZE_Y = 480
-SPEED = 3
+SCREEN_SIZE = (640, 480)
+SPEED = 5
+BALL_SIZE = 20
 
 
 def translate(pos, delta):
     return (pos[0] + delta[0], pos[1] + delta[1])
 
 
-class game:
-    pos = (SIZE_X / 2, SIZE_Y / 2)
-
-
 def main():
-    game.screen = pygame.display.set_mode((SIZE_X, SIZE_Y))
+    screen_rect = pygame.Rect((0, 0), SCREEN_SIZE)
+    screen = pygame.display.set_mode(screen_rect.size)
+    color = pygame.Color('#ffff00')
+    pos = pygame.Rect((0, 0), (BALL_SIZE, BALL_SIZE))
+    pos.center = screen_rect.center
 
     while True:
         for event in pygame.event.get():
@@ -24,23 +23,21 @@ def main():
                     return
 
         pressed_keys = pygame.key.get_pressed()
-        new_pos = game.pos
         if pressed_keys[pygame.K_RIGHT]:
-            new_pos = translate(new_pos, (SPEED, 0))
+            pos.move_ip(SPEED, 0)
         if pressed_keys[pygame.K_LEFT]:
-            new_pos = translate(new_pos, (-SPEED, 0))
+            pos.move_ip(-SPEED, 0)
         if pressed_keys[pygame.K_DOWN]:
-            new_pos = translate(new_pos, (0, SPEED))
+            pos.move_ip(0, SPEED)
         if pressed_keys[pygame.K_UP]:
-            new_pos = translate(new_pos, (0, -SPEED))
+            pos.move_ip(0, -SPEED)
 
-        if 0 < new_pos[0] < SIZE_X and 0 < new_pos[1] < SIZE_Y:
-            game.pos = new_pos
+        pos.clamp_ip(screen_rect)
 
-        game.screen.fill(pygame.Color('#000000'))
-        pygame.draw.circle(game.screen, pygame.Color('#ffff00'), game.pos, 5)
+        screen.fill(pygame.Color('#000000'))
+        pygame.draw.circle(screen, color, pos.center, BALL_SIZE / 2)
         pygame.display.flip()
-        pygame.time.wait(15)
+        pygame.time.wait(50)
 
 
 if __name__ == '__main__':
