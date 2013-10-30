@@ -5,10 +5,6 @@ SPEED = 5
 BALL_SIZE = 20
 
 
-def translate(pos, delta):
-    return (pos[0] + delta[0], pos[1] + delta[1])
-
-
 def main():
     screen_rect = pygame.Rect((0, 0), SCREEN_SIZE)
     screen = pygame.display.set_mode(screen_rect.size)
