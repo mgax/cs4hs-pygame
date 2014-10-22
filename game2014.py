@@ -2,11 +2,14 @@ import pygame
 
 
 def main():
+    pygame.font.init()
+    font = pygame.font.SysFont(pygame.font.get_default_font(), 28)
     R = 30
     FOOD_R = 10
     x = 0
     vx = 10
     vy = 10
+    score = 0
     world = pygame.Rect((0, 0), (800, 600))
     ball = pygame.Rect(world.center, (2*R, 2*R))
     food = None
@@ -41,10 +44,18 @@ def main():
         if ball.top == world.top or ball.bottom == world.bottom:
             vy = -vy
 
-        screen.fill(pygame.Color('white'))
+        if food and ball.colliderect(food):
+            score += 100
+            food = None
+
+        if score > 255:
+            score = 255
+        screen.fill(pygame.Color(score, score, score, 0))
         pygame.draw.circle(screen, pygame.Color('blue'), ball.center, R)
         if food:
             pygame.draw.circle(screen, pygame.Color('red'), food.center, FOOD_R)
+        text = font.render("score: %d" % score, True, pygame.Color('black'))
+        screen.blit(text, (0, 0))
         pygame.display.flip()
         clock.tick(30)
 
