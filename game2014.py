@@ -3,7 +3,7 @@ import pygame
 
 def main():
     pygame.font.init()
-    font = pygame.font.SysFont('menlo', 14)
+    font = pygame.font.SysFont(pygame.font.get_default_font(), 28)
     R = 30
     FOOD_R = 10
     x = 0
