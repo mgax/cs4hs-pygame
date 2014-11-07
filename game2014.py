@@ -4,8 +4,8 @@ import pygame
 def main():
     R = 30
     x = 0
-    vx = 10
-    vy = 10
+    vx = 0
+    vy = 0
     world = pygame.Rect((0, 0), (800, 600))
     ball = pygame.Rect(world.center, (2*R, 2*R))
 
@@ -17,6 +17,15 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return
+
+                if event.key == pygame.K_DOWN:
+                    ball.move_ip(0, 10)
+                if event.key == pygame.K_UP:
+                    ball.move_ip(0, -10)
+                if event.key == pygame.K_RIGHT:
+                    ball.move_ip(10, 0)
+                if event.key == pygame.K_LEFT:
+                    ball.move_ip(-10, 0)
 
         ball.move_ip(vx, vy)
         ball.clamp_ip(world)
