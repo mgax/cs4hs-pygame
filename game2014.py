@@ -13,6 +13,11 @@ def main():
     screen = pygame.display.set_mode(world.size)
 
     while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return
+
         ball.move_ip(vx, vy)
         ball.clamp_ip(world)
         if ball.right == world.right or ball.left == world.left:
