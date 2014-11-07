@@ -18,14 +18,15 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     return
 
-                if event.key == pygame.K_DOWN:
-                    ball.move_ip(0, 10)
-                if event.key == pygame.K_UP:
-                    ball.move_ip(0, -10)
-                if event.key == pygame.K_RIGHT:
-                    ball.move_ip(10, 0)
-                if event.key == pygame.K_LEFT:
-                    ball.move_ip(-10, 0)
+        pressed = pygame.key.get_pressed()
+        if pressed[pygame.K_DOWN]:
+            ball.move_ip(0, 10)
+        if pressed[pygame.K_UP]:
+            ball.move_ip(0, -10)
+        if pressed[pygame.K_RIGHT]:
+            ball.move_ip(10, 0)
+        if pressed[pygame.K_LEFT]:
+            ball.move_ip(-10, 0)
 
         ball.move_ip(vx, vy)
         ball.clamp_ip(world)
