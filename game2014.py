@@ -2,6 +2,8 @@ import pygame
 
 
 def main():
+    pygame.font.init()
+    font = pygame.font.SysFont('menlo', 14)
     R = 30
     FOOD_R = 10
     x = 0
@@ -50,6 +52,8 @@ def main():
         pygame.draw.circle(screen, pygame.Color('blue'), ball.center, R)
         if food:
             pygame.draw.circle(screen, pygame.Color('red'), food.center, FOOD_R)
+        text = font.render("score: %d" % score, True, pygame.Color('black'))
+        screen.blit(text, (0, 0))
         pygame.display.flip()
         clock.tick(30)
 
