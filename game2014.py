@@ -9,6 +9,9 @@ def main():
 
     while True:
         x += 10
+        if x > 800:
+            x = 800
+
         screen.fill(pygame.Color('white'))
         pygame.draw.circle(screen, pygame.Color('blue'), (x, 300), 30)
         pygame.display.flip()
