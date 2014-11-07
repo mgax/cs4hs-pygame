@@ -7,6 +7,7 @@ def main():
     x = 0
     vx = 10
     vy = 10
+    score = 0
     world = pygame.Rect((0, 0), (800, 600))
     ball = pygame.Rect(world.center, (2*R, 2*R))
     food = None
@@ -40,6 +41,10 @@ def main():
             vx = -vx
         if ball.top == world.top or ball.bottom == world.bottom:
             vy = -vy
+
+        if food and ball.colliderect(food):
+            score += 100
+            food = None
 
         screen.fill(pygame.Color('white'))
         pygame.draw.circle(screen, pygame.Color('blue'), ball.center, R)
