@@ -48,7 +48,9 @@ def main():
             score += 100
             food = None
 
-        screen.fill(pygame.Color('white'))
+        if score > 255:
+            score = 255
+        screen.fill(pygame.Color(score, score, score, 0))
         pygame.draw.circle(screen, pygame.Color('blue'), ball.center, R)
         if food:
             pygame.draw.circle(screen, pygame.Color('red'), food.center, FOOD_R)
